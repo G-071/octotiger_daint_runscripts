@@ -2,6 +2,7 @@
 
 # Directories
 OCTOTIGER_BUILD_DIR="/scratch/snx3000/daissgr/build/octobuild-tcp"
+#OCTOTIGER_BUILD_DIR="/scratch/snx3000/pdiehl/PowerTigerDaint20/build/octotiger/build"
 OCTOTIGER_SOURCE_DIR="/scratch/snx3000/daissgr/octotiger"
 DATA_DIR="/scratch/snx3000/daissgr/initfiles_14_revised"
 
@@ -66,7 +67,7 @@ do
 cd ${path}
 source ../../daint-source-me.sh
 
-time srun -N ${NODES} -n ${NODES} ./octotiger ${HPX_ARGS} --config_file=v1309.ini --restart_filename=X.0.silo --max_level=${LEVEL} --stop_step=3 --legacy_hydro=0 ${GPU_ARGS} --disable_output=0 --disable_diagnostics=on
+srun -N ${NODES} -n ${NODES} ./octotiger ${HPX_ARGS} --config_file=v1309.ini --restart_filename=X.0.silo --max_level=${LEVEL} --stop_step=3 --legacy_hydro=0 ${GPU_ARGS} --disable_output=0 --disable_diagnostics=on
 _EOF_
 	chmod u+x submit-job.sl 
         # Push sbatch to a submit all script
