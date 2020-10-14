@@ -2,6 +2,7 @@
 
 Notes:
 - If you use your own build, make sure to adapt the daint-source-me.sh and the OCTOTIGER_BUILD_DIR in the generate_scaling.sh script
+- Also, please change the email address for the slurm jobs
 
 To generate the sbatch files and run directories:
 - ./generate_scaling.sh

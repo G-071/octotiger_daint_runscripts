@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 # Directories
 OCTOTIGER_BUILD_DIR="/scratch/snx3000/daissgr/build/octobuild"
 OCTOTIGER_SOURCE_DIR="/scratch/snx3000/daissgr/octotiger"
@@ -18,7 +17,6 @@ echo "- Replace OCTOTIGER_BUILD_DIR and HPX_ARGS in the script to suit your need
 echo "- Also please replace my email address before running jobs (see sbatch file generation in this script)"
 echo "- Adapt TIME to expected scenario runtime (or edit resulting sbatch files manually"
 echo ""
-sleep 2 # make people read this
 
 echo "Using build in ${OCTOTIGER_BUILD_DIR} ..."
 echo "Using inputfile in ${DATA_DIR} ..."
@@ -27,7 +25,7 @@ echo "Using GPU args: ${GPU_ARGS} ..."
 read -p "Enter desired name for run: " scaling_name
 mkdir -p ${scaling_name}
 cd ${scaling_name}
-echo "!/bin/bash" > submit_all_jobs.sh
+echo "#!/bin/bash" > submit_all_jobs.sh
 chmod u+x submit_all_jobs.sh
 
 for LEVEL in 14 
@@ -52,7 +50,7 @@ do
         # Symlink dataset into job folder
         ln -s ${DATA_DIR}/${LEVEL}/splitted_X.0.silo.data X.0.silo.data
         ln -s ${DATA_DIR}/${LEVEL}/splitted_X.0.silo X.0.silo
-        # Crate sbatch file
+        # Create sbatch file
 	cat << _EOF_ > submit-job.sl
 #!/bin/bash -l
 #SBATCH --output=slurm.out
