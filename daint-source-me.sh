@@ -1,11 +1,12 @@
 
+GCC_version=8.3.0
+
 # defaults for GD
 export SRC=/scratch/snx3000/daissgr/src
 export BLD=/scratch/snx3000/daissgr/build
 export INSTALL_ROOT=/scratch/snx3000/daissgr/apps/$GCC_version
 
 # Versions
-GCC_version=8.3.0
 CMAKE_version=3.10.5
 MPI_version=7.7.15
 HWLOC_VER=2.0.4

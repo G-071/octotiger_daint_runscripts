@@ -1,16 +1,18 @@
 #!/bin/bash
 
 # Directories
-OCTOTIGER_BUILD_DIR="/scratch/snx3000/daissgr/build/octobuild-tcp"
+#OCTOTIGER_BUILD_DIR="/scratch/snx3000/daissgr/build/octobuild-tcp"
+OCTOTIGER_BUILD_DIR="/scratch/snx3000/daissgr/build/octobuild"
 #OCTOTIGER_BUILD_DIR="/scratch/snx3000/pdiehl/PowerTigerDaint20/build/octotiger/build"
 OCTOTIGER_SOURCE_DIR="/scratch/snx3000/daissgr/octotiger"
-DATA_DIR="/scratch/snx3000/daissgr/initfiles_14_revised"
+#DATA_DIR="/scratch/snx3000/daissgr/initfiles_14_revised"
+DATA_DIR="/scratch/snx3000/daissgr/initfiles-14-revised2"
 
 #Config
 HPX_ARGS="-Ihpx.stacks.use_guard_pages=0"
 GPU_ARGS="--cuda_number_gpus=1 --cuda_streams_per_gpu=128 --cuda_buffer_capacity=4 --cuda_polling_executor=0"
 FAB_ENABLE= #"-Ihpx.parcel.libfabric.enable=1 -Ihpx.parcel.bootstrap=libfabric -Ihpx.parcel.message_handlers=0"
-TIME=00:30:00
+TIME=01:00:00
 
 echo ""
 echo "INSTRUCTIONS:"
@@ -67,7 +69,7 @@ do
 cd ${path}
 source ../../daint-source-me.sh
 
-srun -N ${NODES} -n ${NODES} ./octotiger ${HPX_ARGS} --config_file=v1309.ini --restart_filename=X.0.silo --max_level=${LEVEL} --stop_step=3 --legacy_hydro=0 ${GPU_ARGS} --disable_output=0 --disable_diagnostics=on
+srun -N ${NODES} -n ${NODES} ./octotiger ${HPX_ARGS} --config_file=v1309.ini --restart_filename=X.0.silo --max_level=${LEVEL} --stop_step=3 --legacy_hydro=0 ${GPU_ARGS} --disable_output=on --disable_diagnostics=on
 _EOF_
 	chmod u+x submit-job.sl 
         # Push sbatch to a submit all script
