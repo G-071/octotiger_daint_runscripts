@@ -18,7 +18,7 @@ echo "- Replace OCTOTIGER_BUILD_DIR and HPX_ARGS in the script to suit your need
 echo "- Also please replace my email address before running jobs (see sbatch file generation in this script)"
 echo "- Adapt TIME to expected scenario runtime (or edit resulting sbatch files manually"
 echo ""
-sleep 4 # Make people read this
+sleep 2 # make people read this
 
 echo "Using build in ${OCTOTIGER_BUILD_DIR} ..."
 echo "Using inputfile in ${DATA_DIR} ..."
@@ -50,7 +50,7 @@ do
         cp ${OCTOTIGER_BUILD_DIR}/octotiger octotiger
         cp ${DATA_DIR}/v1309.ini .
         # Symlink dataset into job folder
-        ln -s ${DATA_DIR}/${LEVEL}/splitted_X.0.silo X.0.silo.data
+        ln -s ${DATA_DIR}/${LEVEL}/splitted_X.0.silo.data X.0.silo.data
         ln -s ${DATA_DIR}/${LEVEL}/splitted_X.0.silo X.0.silo
         # Crate sbatch file
 	cat << _EOF_ > submit-job.sl
@@ -68,7 +68,7 @@ do
 cd ${path}
 source ../../daint-source-me.sh
 
-srun -N ${NODES} -n ${NODES} ./octotiger ${HPX_ARGS} --config_file=v1309.ini --restart_filename=X.0.silo --max_level=${LEVEL} --stop_step=3 --legacy_hydro=0 ${GPU_ARGS} --disable_output=0 --disable_diagnostics=on
+time srun -N ${NODES} -n ${NODES} ./octotiger ${HPX_ARGS} --config_file=v1309.ini --restart_filename=X.0.silo --max_level=${LEVEL} --stop_step=3 --legacy_hydro=0 ${GPU_ARGS} --disable_output=0 --disable_diagnostics=on
 _EOF_
 	chmod u+x submit-job.sl 
         # Push sbatch to a submit all script
