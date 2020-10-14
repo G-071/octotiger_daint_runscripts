@@ -4,6 +4,7 @@
 #OCTOTIGER_BUILD_DIR="/scratch/snx3000/daissgr/build/octobuild-tcp"
 OCTOTIGER_BUILD_DIR="/scratch/snx3000/daissgr/build/octobuild"
 #OCTOTIGER_BUILD_DIR="/scratch/snx3000/pdiehl/PowerTigerDaint20/build/octotiger/build"
+#OCTOTIGER_BUILD_DIR="/scratch/snx3000/pdiehl/PowerTigerSC19/build/octotiger/build"
 OCTOTIGER_SOURCE_DIR="/scratch/snx3000/daissgr/octotiger"
 #DATA_DIR="/scratch/snx3000/daissgr/initfiles_14_revised"
 DATA_DIR="/scratch/snx3000/daissgr/initfiles-14-revised2"
@@ -51,8 +52,8 @@ do
         cp ${OCTOTIGER_BUILD_DIR}/octotiger octotiger
         cp ${DATA_DIR}/v1309.ini .
         # Symlink dataset into job folder
-        ln -s ${DATA_DIR}/${LEVEL}/splitted_X.0.silo.data X.0.silo.data
-        ln -s ${DATA_DIR}/${LEVEL}/splitted_X.0.silo X.0.silo
+        ln -s ${DATA_DIR}/${LEVEL}/splitted_X.0.silo.data splitted_X.0.silo.data
+        ln -s ${DATA_DIR}/${LEVEL}/splitted_X.0.silo splitted_X.0.silo
         # Create sbatch file
 	cat << _EOF_ > submit-job.sl
 #!/bin/bash -l
@@ -69,7 +70,7 @@ do
 cd ${path}
 source ../../daint-source-me.sh
 
-srun -N ${NODES} -n ${NODES} ./octotiger ${HPX_ARGS} --config_file=v1309.ini --restart_filename=X.0.silo --max_level=${LEVEL} --stop_step=3 --legacy_hydro=0 ${GPU_ARGS} --disable_output=on --disable_diagnostics=on
+srun -N ${NODES} -n ${NODES} ./octotiger ${HPX_ARGS} --config_file=v1309.ini --restart_filename=splitted_X.0.silo --max_level=${LEVEL} --stop_step=3 --legacy_hydro=0 ${GPU_ARGS} --disable_output=on --disable_diagnostics=on
 _EOF_
 	chmod u+x submit-job.sl 
         # Push sbatch to a submit all script
