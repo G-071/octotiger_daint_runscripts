@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Directories
-OCTOTIGER_BUILD_DIR="/scratch/snx3000/daissgr/build/octobuild"
+OCTOTIGER_BUILD_DIR="/scratch/snx3000/daissgr/build/octobuild-tcp"
 OCTOTIGER_SOURCE_DIR="/scratch/snx3000/daissgr/octotiger"
 DATA_DIR="/scratch/snx3000/daissgr/initfiles_14_revised"
 
